@@ -59,4 +59,6 @@ const fs = require('fs');
     core.setFailed(error.message);
 }
 
+console.log("successfull");
+
 // module.exports = run;
