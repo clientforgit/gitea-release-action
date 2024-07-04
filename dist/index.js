@@ -45,7 +45,7 @@ async function run() {
     xhr.send(JSON.stringify({"tag_name": tag, "name": releaseName, "draft": draft, "prerelease": prerelease, "target_commitish": commitish}));
     try {
         xhr.send();
-        if (xhr.status != 200) {
+        if (xhr.status !== 200) {
             core.setFailed(`Error ${xhr.status}: ${xhr.statusText}`);
         } else {
             var response = JSON.parse(xhr.responseText);
