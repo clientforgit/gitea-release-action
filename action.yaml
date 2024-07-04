@@ -41,6 +41,10 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Installing Node 18
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
     - run: npm i @actions/core && npm i @actions/github && node ${{ github.action_path }}/dist/index.js
 branding:
   icon: 'tag'
