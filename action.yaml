@@ -41,9 +41,6 @@ outputs:
 runs:
   using: 'node16'
   main: 'dist/index.js'
-  steps:
-    - run: npm i @actions/core
-    - run: npm i @actions/github
 branding:
   icon: 'tag'
   color: 'gray-dark'
