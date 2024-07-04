@@ -41,7 +41,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: node dist/index.js
+    - run: node ${{ github.action_path }}/dist/index.js
 branding:
   icon: 'tag'
   color: 'gray-dark'
