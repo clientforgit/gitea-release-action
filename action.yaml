@@ -41,6 +41,8 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - run: npm i @actions/core
+    - run: npm i @actions/github
     - run: node ${{ github.action_path }}/dist/index.js
 branding:
   icon: 'tag'
