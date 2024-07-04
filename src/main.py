@@ -1,7 +1,47 @@
 import github_action_utils as gha_utils
-from github_action_utils import get_user_input
+from github_action_utils import get_user_input, set_output, get_state
+import httpx
+
+defaults = {}
 
 with gha_utils.group("My Group"):
-  gha_utils.notice(get_user_input("tag_name"))
-  gha_utils.notice(get_user_input("release_name"))
-  gha_utils.notice("successful")
+  tag_name = get_user_input("tag_name") 
+  if not tag_name:
+    gha_utils.error(
+        "Cannot find specified tag name", title="Missing tag name", file="src/main.py"
+    )
+    return
+  release_name = get_user_input("release_name")
+  owner = get_user_input("owner")
+  repo = get_user_input("repo")
+  draft = get_user_input("draft") == 'true'
+  prerelease = get_user_input("prerelease") == 'true'
+  commitsh = get_user_input("commitsh")
+
+  gitea_domain = get_state("GITEA_DOMAIN")
+  gha_utils.notice("gitea_domain: "str(gitea_domain))
+  access_token = get_state("ACCESS_TOKEN")
+  body = {"tag_name": tag_name, 
+          "release_name" = release_name,
+          "owner" = owner,
+          "repo" = repo,
+          "draft" = draft,
+          "prerelease" = prerelease,
+          "commitsh" = commitsh
+         }
+  
+  url = f'https://{gitea_domain}/api/v1/repos/{owner}/{repo}/releases'
+  headers = {'Authorization', access_token}
+
+  request = httpx.post(url, headers=headers, json=body) 
+  response = client.send(request)
+  response_json = response.json()
+  if response.status_code == 200:
+    set_output("id", response.json["id"])
+    set_output("html_url", response.json["html_url"])
+    set_output("upload_url", response.json["upload_url"])
+  else:
+    gha_utils.error(
+        f"ERROR: {response.status_code} status code of server response", title="Request failure", file="src/main.py"
+    )
+    return
