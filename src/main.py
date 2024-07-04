@@ -1,4 +1,5 @@
-import github_action_utils as gha_utils, get_user_input
+import github_action_utils as gha_utils
+from github_action_utils import get_user_input
 
 with gha_utils.group("My Group"):
   gha_utils.notice(get_user_input("tag_name"))
