@@ -1,0 +1,28 @@
+{
+  "name": "create-release",
+  "version": "1.0.0",
+  "description": "Create a release",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/main.js",
+    "precommit": "npm run build && git add dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/actions/create-release"
+  },
+  "keywords": [
+    "actions",
+    "node"
+  ],
+  "author": "GitHub",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.0.0",
+    "@actions/exec": "^1.0.0",
+    "@actions/github": "^2.2.0"
+  }, 
+  "devDependencies": {
+    "@zeit/ncc": "^0.20.4"
+  }
+}
