@@ -2,10 +2,7 @@
   "name": "untitled",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "main": "dist/index.js"
-  },
+  "main": "dist/index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
