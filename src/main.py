@@ -8,7 +8,7 @@ defaults = {}
 
 with gha_utils.group("My Group"):
   tag_name = get_user_input("tag_name")
-  tag_name = re.sub(r'[^\t]', '', tag_name.strip()) if tag_name else None
+  tag_name = re.sub(r'[ \t]', '', tag_name.strip()) if tag_name else None
   gha_utils.notice("tag_name: " + tag_name)
   owner = get_user_input("owner").strip()
   owner = owner.strip() if owner else None
