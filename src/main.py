@@ -14,8 +14,11 @@ with gha_utils.group("My Group"):
     )
     sys.exit()
   release_name = get_user_input("release_name")
+  gha_utils.notice("release_name: " + release_name)
   owner = get_user_input("owner")
+  gha_utils.notice("owner: " + owner)
   repo = get_user_input("repo")
+  gha_utils.notice("repo: " + repo)
   draft = get_user_input("draft") == 'true'
   prerelease = get_user_input("prerelease") == 'true'
   commitsh = get_user_input("commitsh")
