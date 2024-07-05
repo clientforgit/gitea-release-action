@@ -47,7 +47,7 @@ with gha_utils.group("My Group"):
 
   response = httpx.post(url, headers=headers, json=body, verify=False) 
   response_json = response.json()
-  if response.status_code == 200:
+  if response.status_code in [200, 201]:
     set_output("id", response.json["id"])
     set_output("html_url", response.json["html_url"])
     set_output("upload_url", response.json["upload_url"])
