@@ -33,8 +33,7 @@ with gha_utils.group("My Group"):
   url = f'https://{gitea_domain}/api/v1/repos/{owner}/{repo}/releases'
   headers = {'Authorization', access_token}
 
-  request = httpx.post(url, headers=headers, json=body) 
-  response = client.send(request)
+  response = httpx.post(url, headers=headers, json=body) 
   response_json = response.json()
   if response.status_code == 200:
     set_output("id", response.json["id"])
