@@ -22,12 +22,12 @@ with gha_utils.group("My Group"):
   gha_utils.notice("gitea_domain: " + str(gitea_domain))
   access_token = get_state("ACCESS_TOKEN")
   body = {"tag_name": tag_name, 
-          "release_name" = release_name,
-          "owner" = owner,
-          "repo" = repo,
-          "draft" = draft,
-          "prerelease" = prerelease,
-          "commitsh" = commitsh
+          "release_name": release_name,
+          "owner": owner,
+          "repo": repo,
+          "draft": draft,
+          "prerelease": prerelease,
+          "commitsh": commitsh
          }
   
   url = f'https://{gitea_domain}/api/v1/repos/{owner}/{repo}/releases'
