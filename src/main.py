@@ -1,23 +1,23 @@
 import github_action_utils as gha_utils
-from github_action_utils import get_user_input, set_output, get_env
+from github_action_utils import get_state, set_output, get_env
 import httpx
 import sys
 
 defaults = {}
 
 with gha_utils.group("My Group"):
-  tag_name = get_user_input("tag_name") 
+  tag_name = get_state("tag_name") 
   if not tag_name:
     gha_utils.error(
         f"Cannot find specified tag name '{tag_name}'", title="Missing tag name", file="src/main.py"
     )
     sys.exit()
-  release_name = get_user_input("release_name")
-  owner = get_user_input("owner")
-  repo = get_user_input("repo")
-  draft = get_user_input("draft") == 'true'
-  prerelease = get_user_input("prerelease") == 'true'
-  commitsh = get_user_input("commitsh")
+  release_name = get_state("release_name")
+  owner = get_state("owner")
+  repo = get_state("repo")
+  draft = get_state("draft") == 'true'
+  prerelease = get_state("prerelease") == 'true'
+  commitsh = get_state("commitsh")
 
   gitea_domain = get_env("GITEA_DOMAIN")
   gha_utils.notice("gitea_domain: " + gitea_domain)
