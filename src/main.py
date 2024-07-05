@@ -33,7 +33,7 @@ with gha_utils.group("My Group"):
          }
   
   url = f'https://{gitea_domain}/api/v1/repos/{owner}/{repo}/releases'
-  headers = {'Authorization', access_token}
+  headers = {'Authorization': access_token}
 
   response = httpx.post(url, headers=headers, json=body) 
   response_json = response.json()
