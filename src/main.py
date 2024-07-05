@@ -2,12 +2,13 @@ import github_action_utils as gha_utils
 from github_action_utils import get_user_input, set_output, get_env
 import httpx
 import sys
+import re
 
 defaults = {}
 
 with gha_utils.group("My Group"):
   tag_name = get_user_input("tag_name")
-  tag_name = tag_name.strip() if tag_name else None
+  tag_name = re.sub(r'[^\w]', ' ', tag_name.strip()) if tag_name else None
   gha_utils.notice("tag_name: " + tag_name)
   owner = get_user_input("owner").strip()
   owner = owner.strip() if owner else None
@@ -21,7 +22,7 @@ with gha_utils.group("My Group"):
     )
     sys.exit()
   release_name = get_user_input("release_name")
-  release_name = release_name.strip() if release_name else None
+  release_name = re.sub(r'[^\w]', ' ', release_name.strip()) if release_name else None
   gha_utils.notice("release_name: " + release_name)
   draft = get_user_input("draft") == 'true'
   prerelease = get_user_input("prerelease") == 'true'
