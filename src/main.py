@@ -9,7 +9,7 @@ with gha_utils.group("My Group"):
   tag_name = get_user_input("tag_name") 
   if not tag_name:
     gha_utils.error(
-        f"Cannot find specified tag name '{tag_name}'", title="Missing tag name", file="src/main.py"
+        f"Cannot find specified tag name '{tag_name.__dict__}'", title="Missing tag name", file="src/main.py"
     )
     sys.exit()
   release_name = get_user_input("release_name")
