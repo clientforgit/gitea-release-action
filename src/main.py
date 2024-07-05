@@ -6,22 +6,27 @@ import sys
 defaults = {}
 
 with gha_utils.group("My Group"):
-  tag_name = get_user_input("tag_name").strip()
+  tag_name = get_user_input("tag_name")
+  tag_name = tag_name.strip() if tag_name else None
   gha_utils.notice("tag_name: " + tag_name)
-  if not tag_name:
-    gha_utils.error(
-        f"Cannot find specified tag name '{tag_name}'", title="Missing tag name", file="src/main.py"
-    )
-    sys.exit()
-  release_name = get_user_input("release_name").strip()
-  gha_utils.notice("release_name: " + release_name)
   owner = get_user_input("owner").strip()
+  owner = owner.strip() if owner else None
   gha_utils.notice("owner: " + owner)
   repo = get_user_input("repo").strip()
+  repo = repo.strip() if repo else None
   gha_utils.notice("repo: " + repo)
-  draft = get_user_input("draft").strip() == 'true'
-  prerelease = get_user_input("prerelease").strip() == 'true'
-  commitsh = get_user_input("commitsh").strip()
+  if not tag_name or not owner or not repo:
+    gha_utils.error(
+        f"Cannot find one of required user inputs: tag_name, owner or repo", title="Missing requirements", file="src/main.py"
+    )
+    sys.exit()
+  release_name = get_user_input("release_name")
+  release_name = release_name.strip() if release_name else None
+  gha_utils.notice("release_name: " + release_name)
+  draft = get_user_input("draft") == 'true'
+  prerelease = get_user_input("prerelease") == 'true'
+  commitsh = get_user_input("commitsh")
+  commitsh = commitsh.strip() if commitsh else None
 
   gitea_domain = get_env("GITEA_DOMAIN")
   gha_utils.notice("gitea_domain: " + gitea_domain)
