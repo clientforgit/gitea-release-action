@@ -1,6 +1,7 @@
 import github_action_utils as gha_utils
 from github_action_utils import get_user_input, set_output, get_state
 import httpx
+import sys
 
 defaults = {}
 
@@ -10,7 +11,7 @@ with gha_utils.group("My Group"):
     gha_utils.error(
         "Cannot find specified tag name", title="Missing tag name", file="src/main.py"
     )
-    return
+    sys.exit()
   release_name = get_user_input("release_name")
   owner = get_user_input("owner")
   repo = get_user_input("repo")
