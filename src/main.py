@@ -44,4 +44,4 @@ with gha_utils.group("My Group"):
     gha_utils.error(
         f"ERROR: {response.status_code} status code of server response", title="Request failure", file="src/main.py"
     )
-    return
+    sys.exit()
