@@ -19,7 +19,7 @@ with gha_utils.group("My Group"):
   commitsh = get_user_input("commitsh")
 
   gitea_domain = get_state("GITEA_DOMAIN")
-  gha_utils.notice("gitea_domain: "str(gitea_domain))
+  gha_utils.notice("gitea_domain: " + str(gitea_domain))
   access_token = get_state("ACCESS_TOKEN")
   body = {"tag_name": tag_name, 
           "release_name" = release_name,
